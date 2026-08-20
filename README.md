@@ -59,20 +59,28 @@ Sistema de Chatbot + CRM omnicanal capaz de procesar mensajes de texto, notas de
    - **Access Token**: WhatsApp → API Setup → Temporary Access Token (o permanente)
    - **Verify Token**: Crea uno propio (ej: `mi_token_secreto_123`)
 
-### 3. OpenAI
+### 3. OpenRouter (LLM con DeepSeek V4 Flash)
+
+1. Crea cuenta en [openrouter.ai](https://openrouter.ai)
+2. Genera una API Key en **Keys**
+3. El modelo recomendado es **DeepSeek V4 Flash** (`deepseek/deepseek-chat-v4-flash`)
+4. Asegúrate de tener créditos disponibles
+5. Opcional: Configura un fallback a otros modelos si es necesario
+
+### 4. OpenAI (Para Whisper STT y TTS)
 
 1. Crea cuenta en [platform.openai.com](https://platform.openai.com)
 2. Genera una API Key en **API Keys**
-3. Asegúrate de tener créditos disponibles
+3. Asegúrate de tener créditos disponibles para Whisper (STT) y TTS
 
-### 4. ElevenLabs (Opcional pero recomendado)
+### 5. ElevenLabs (Opcional pero recomendado)
 
 1. Crea cuenta en [elevenlabs.io](https://elevenlabs.io)
 2. Ve a **Profile** → **API Key**
 3. Copia tu API Key
 4. Elige una voz predeterminada (ej: `rachel`, `adam`, `antoine`)
 
-### 5. Vapi.ai o Retell AI (Para llamadas)
+### 6. Vapi.ai o Retell AI (Para llamadas)
 
 #### Opción A: Vapi.ai
 1. Crea cuenta en [vapi.ai](https://vapi.ai)
@@ -126,9 +134,12 @@ WHATSAPP_BUSINESS_ACCOUNT_ID=tu-business-account-id
 WHATSAPP_ACCESS_TOKEN=tu-access-token
 WHATSAPP_VERIFY_TOKEN=mi_token_secreto_123
 
-# OpenAI
+# OpenRouter (LLM - DeepSeek V4 Flash)
+OPENROUTER_API_KEY=sk-or-tu-api-key
+LLM_MODEL=deepseek/deepseek-chat-v4-flash
+
+# OpenAI (para Whisper STT y TTS)
 OPENAI_API_KEY=sk-tu-api-key
-LLM_MODEL=gpt-4o-mini
 
 # ElevenLabs (opcional)
 ELEVENLABS_API_KEY=tu-elevenlabs-key
