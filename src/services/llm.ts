@@ -280,8 +280,13 @@ class LLMService {
    */
   async summarizeCall(transcription: string): Promise<string> {
     try {
+      const apiKey = this.openrouterApiKey || this.openaiApiKey;
+      const baseUrl = this.openrouterApiKey 
+        ? 'https://openrouter.ai/api/v1' 
+        : 'https://api.openai.com/v1';
+
       const response = await axios.post(
-        'https://api.openai.com/v1/chat/completions',
+        `${baseUrl}/chat/completions`,
         {
           model: this.model,
           messages: [
@@ -300,7 +305,11 @@ class LLMService {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.openaiApiKey}`,
+            Authorization: `Bearer ${apiKey}`,
+            ...(this.openrouterApiKey && {
+              'HTTP-Referer': process.env.WEBHOOK_BASE_URL || 'http://localhost:3000',
+              'X-Title': 'CRM Multicanal IA',
+            }),
           },
         }
       );
@@ -317,8 +326,13 @@ class LLMService {
    */
   async extractIntent(message: string): Promise<{ intent: string; entities: Record<string, any> }> {
     try {
+      const apiKey = this.openrouterApiKey || this.openaiApiKey;
+      const baseUrl = this.openrouterApiKey 
+        ? 'https://openrouter.ai/api/v1' 
+        : 'https://api.openai.com/v1';
+
       const response = await axios.post(
-        'https://api.openai.com/v1/chat/completions',
+        `${baseUrl}/chat/completions`,
         {
           model: this.model,
           messages: [
@@ -338,7 +352,11 @@ class LLMService {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.openaiApiKey}`,
+            Authorization: `Bearer ${apiKey}`,
+            ...(this.openrouterApiKey && {
+              'HTTP-Referer': process.env.WEBHOOK_BASE_URL || 'http://localhost:3000',
+              'X-Title': 'CRM Multicanal IA',
+            }),
           },
         }
       );
